@@ -4,8 +4,6 @@ import com.example.openinghoursendpoint.builder.InvalidScheduleDataException
 import com.example.openinghoursendpoint.builder.ScheduleBuilder
 import com.example.openinghoursendpoint.model.*
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.jsonArray
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
@@ -19,6 +17,7 @@ class ScheduleController {
     fun getHumanReadableSchedule(@RequestBody openingHoursJson: String): ResponseEntity<String> {
 
         return try {
+
             val dayOpeningHours = Json.decodeFromString<Map<DayOfWeek, List<OpeningHours>>>(openingHoursJson)
             val schedule = ScheduleBuilder.buildSchedule(dayOpeningHours)
             ResponseEntity.ok(schedule.getHumanReadable())
