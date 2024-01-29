@@ -1,13 +1,15 @@
-package com.example.openinghoursendpoint.builder
+package com.example.openinghoursendpoint.service
 
 import com.example.openinghoursendpoint.model.DayOfWeek
 import com.example.openinghoursendpoint.model.OpeningHours
 import com.example.openinghoursendpoint.model.OpeningType
 import com.example.openinghoursendpoint.model.Schedule
 import kotlinx.serialization.json.Json
+import org.springframework.stereotype.Service
 import java.util.concurrent.TimeUnit
 
-object ScheduleBuilder {
+@Service
+class ScheduleService {
 
     fun buildScheduleFromJson(openingHoursJson: String): Schedule {
         val dayOpeningHours = Json.decodeFromString<Map<DayOfWeek, List<OpeningHours>>>(openingHoursJson)
