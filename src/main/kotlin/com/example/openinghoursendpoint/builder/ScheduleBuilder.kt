@@ -4,11 +4,13 @@ import com.example.openinghoursendpoint.model.DayOfWeek
 import com.example.openinghoursendpoint.model.OpeningHours
 import com.example.openinghoursendpoint.model.OpeningType
 import com.example.openinghoursendpoint.model.Schedule
+import kotlinx.serialization.json.Json
 import java.util.concurrent.TimeUnit
 
 object ScheduleBuilder {
 
-    fun buildSchedule(dayOpeningHours: Map<DayOfWeek, List<OpeningHours>>): Schedule {
+    fun buildScheduleFromJson(openingHoursJson: String): Schedule {
+        val dayOpeningHours = Json.decodeFromString<Map<DayOfWeek, List<OpeningHours>>>(openingHoursJson)
         val schedule = DayOfWeek.entries.associateWith { _ -> mutableListOf<OpeningHours>() }
         dayOpeningHours.forEach { (day, openingHours) -> schedule.getValue(day).addAll(openingHours) }
         schedule.forEach { (_, openingHours) -> openingHours.sort() }
