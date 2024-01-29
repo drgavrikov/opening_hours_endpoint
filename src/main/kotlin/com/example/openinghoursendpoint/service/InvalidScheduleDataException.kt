@@ -1,3 +1,3 @@
-package com.example.openinghoursendpoint.builder
+package com.example.openinghoursendpoint.service
 
 class InvalidScheduleDataException(message: String) : Exception(message)

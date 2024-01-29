@@ -2,7 +2,7 @@ package com.example.openinghoursendpoint
 
 import com.example.openinghoursendpoint.model.OpeningHours
 import com.example.openinghoursendpoint.model.OpeningType
-import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 class OpeningHoursTest {
@@ -16,17 +16,17 @@ class OpeningHoursTest {
         val openingHours5 = OpeningHours(OpeningType.CLOSE, 65400)
         val openingHours6 = OpeningHours(OpeningType.OPEN, 65430)
 
-        Assertions.assertThat(openingHours1.convertTime()).isEqualTo("9 AM")
-        Assertions.assertThat(openingHours2.convertTime()).isEqualTo("10:30 AM")
-        Assertions.assertThat(openingHours3.convertTime()).isEqualTo("10:30:40 AM")
-        Assertions.assertThat(openingHours4.convertTime()).isEqualTo("6 PM")
-        Assertions.assertThat(openingHours5.convertTime()).isEqualTo("6:10 PM")
-        Assertions.assertThat(openingHours6.convertTime()).isEqualTo("6:10:30 PM")
+        assertThat(openingHours1.convertTime()).isEqualTo("9 AM")
+        assertThat(openingHours2.convertTime()).isEqualTo("10:30 AM")
+        assertThat(openingHours3.convertTime()).isEqualTo("10:30:40 AM")
+        assertThat(openingHours4.convertTime()).isEqualTo("6 PM")
+        assertThat(openingHours5.convertTime()).isEqualTo("6:10 PM")
+        assertThat(openingHours6.convertTime()).isEqualTo("6:10:30 PM")
 
-        Assertions.assertThat(openingHours1).isLessThan(openingHours2)
-        Assertions.assertThat(openingHours2).isLessThan(openingHours3)
-        Assertions.assertThat(openingHours3).isLessThan(openingHours4)
-        Assertions.assertThat(openingHours4).isLessThan(openingHours5)
-        Assertions.assertThat(openingHours5).isLessThan(openingHours6)
+        assertThat(openingHours1).isLessThan(openingHours2)
+        assertThat(openingHours2).isLessThan(openingHours3)
+        assertThat(openingHours3).isLessThan(openingHours4)
+        assertThat(openingHours4).isLessThan(openingHours5)
+        assertThat(openingHours5).isLessThan(openingHours6)
     }
 }
