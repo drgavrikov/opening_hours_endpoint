@@ -10,7 +10,7 @@ class ScheduleBuilderTest {
 
     @Test
     fun testBuildSchedule() {
-        val schedule = ScheduleBuilder.buildScheduleFromJson(readResourceFile("opening_hours.json"))
+        val schedule = ScheduleBuilder.buildScheduleFromJson(readResourceFile("valid_opening_hours.json"))
         val humanReadableSchedule = readResourceFile("schedule.txt")
         Assertions.assertThat(schedule.getHumanReadable()).isEqualTo(humanReadableSchedule)
     }

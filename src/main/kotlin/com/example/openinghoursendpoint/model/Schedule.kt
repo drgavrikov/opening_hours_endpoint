@@ -1,10 +1,12 @@
 package com.example.openinghoursendpoint.model
 
+import java.util.*
+
 class Schedule(private val dayOpeningHours: Map<DayOfWeek, List<OpeningHours>>) {
 
     fun getHumanReadable(): String {
         return dayOpeningHours.map { (day, openingHour) ->
-            val humanReadableDay = day.name.lowercase().capitalize()
+            val humanReadableDay = day.name.lowercase().replaceFirstChar { it.titlecase(Locale.getDefault()) }
             if (openingHour.isNotEmpty()) {
                 val humanReadableHours = (openingHour.indices step 2)
                     .joinToString(", ") { index ->
