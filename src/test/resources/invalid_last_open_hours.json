@@ -1,0 +1,7 @@
+{
+  "monday": [
+    {"type": "open", "value": 20000},
+    {"type": "close", "value": 30000},
+    {"type": "open", "value": 80000}
+  ]
+}
