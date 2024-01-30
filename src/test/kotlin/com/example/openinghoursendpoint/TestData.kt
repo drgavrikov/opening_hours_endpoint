@@ -1,9 +1,9 @@
 package com.example.openinghoursendpoint
 
-import com.example.openinghoursendpoint.model.DayOfWeek
 import com.example.openinghoursendpoint.model.OpeningHours
 import com.example.openinghoursendpoint.model.OpeningType
 import com.example.openinghoursendpoint.model.Schedule
+import java.time.DayOfWeek
 
 const val VALID_SCHEDULE_JSON = "valid_schedule.json"
 const val HUMAN_READABLE_SCHEDULE = "human-readable-schedule.txt"
