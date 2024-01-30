@@ -1,11 +1,9 @@
 package com.example.openinghoursendpoint.controller
 
 import com.example.openinghoursendpoint.*
-import com.example.openinghoursendpoint.service.InvalidScheduleDataException
 import com.example.openinghoursendpoint.service.ScheduleService
 import org.hamcrest.Matchers.equalTo
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertThrows
 import org.mockito.Mockito.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
