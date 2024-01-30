@@ -1,4 +1,4 @@
-package com.example.openinghoursendpoint
+package com.example.openinghoursendpoint.model
 
 import com.example.openinghoursendpoint.model.DayOfWeek
 import org.assertj.core.api.Assertions
