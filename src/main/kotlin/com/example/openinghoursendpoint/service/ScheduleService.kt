@@ -42,7 +42,7 @@ class ScheduleService {
         if (incorrectOpeningHours.isNotEmpty()) {
             val message = "Exception: Opening hours for the following days exceed max value: \n" + incorrectOpeningHours
                 .entries
-                .joinToString("") { (day, openingHours) -> "- $day: ${openingHours.joinToString(", ") { it.value.toString() }}\n" }
+                .joinToString("\n") { (day, openingHours) -> "- $day: ${openingHours.joinToString(", ") { it.value.toString() }}" }
             throw InvalidScheduleDataException(message)
         }
     }
@@ -54,7 +54,7 @@ class ScheduleService {
         if (daysWithIncorrectOpeningHoursSequence.isNotEmpty()) {
             val message = "Exception: Two consecutive OpeningHours with the same type in ${
                 daysWithIncorrectOpeningHoursSequence.joinToString(", ") { it.name }
-            }\n"
+            }"
             throw InvalidScheduleDataException(message)
         }
 
