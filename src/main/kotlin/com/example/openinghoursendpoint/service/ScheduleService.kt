@@ -1,20 +1,22 @@
 package com.example.openinghoursendpoint.service
 
-import com.example.openinghoursendpoint.model.DayOfWeek
 import com.example.openinghoursendpoint.model.OpeningHours
 import com.example.openinghoursendpoint.model.OpeningType
 import com.example.openinghoursendpoint.model.Schedule
 import kotlinx.serialization.json.Json
 import org.springframework.stereotype.Service
+import java.time.DayOfWeek
 import java.util.concurrent.TimeUnit
 
 @Service
 class ScheduleService {
 
     fun buildScheduleFromJson(openingHoursJson: String): Schedule {
-        val dayOpeningHours = Json.decodeFromString<Map<DayOfWeek, List<OpeningHours>>>(openingHoursJson)
+        val dayOpeningHours = Json.decodeFromString<Map<String, List<OpeningHours>>>(openingHoursJson)
         val schedule = DayOfWeek.entries.associateWith { _ -> mutableListOf<OpeningHours>() }
-        dayOpeningHours.forEach { (day, openingHours) -> schedule.getValue(day).addAll(openingHours) }
+        dayOpeningHours.forEach { (day, openingHours) ->
+            schedule.getValue(DayOfWeek.valueOf(day.uppercase())).addAll(openingHours)
+        }
         schedule.forEach { (_, openingHours) -> openingHours.sort() }
 
         schedule
@@ -27,10 +29,20 @@ class ScheduleService {
                 }
             }
 
+        schedule.forEach { (day, openingHours) ->
+            println("${day.name}: ${openingHours.map { it.toString() }}")
+        }
+
         validateCorrectOpeningHours(schedule)
         validateOpeningHoursSequence(schedule)
 
         return Schedule(schedule)
+    }
+
+    private fun DayOfWeek.previous(): DayOfWeek {
+        val values = DayOfWeek.entries
+        val previousIndex = (values.indexOf(this) - 1 + values.size) % values.size
+        return values[previousIndex]
     }
 
     private fun validateCorrectOpeningHours(dayOpeningHours: Map<DayOfWeek, List<OpeningHours>>) {
