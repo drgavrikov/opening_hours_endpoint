@@ -16,4 +16,21 @@ class Schedule(private val dayOpeningHours: Map<DayOfWeek, List<OpeningHours>>) 
             } else "$humanReadableDay: Closed"
         }.joinToString("\n")
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Schedule
+
+        return dayOpeningHours == other.dayOpeningHours
+    }
+
+    override fun hashCode(): Int {
+        return dayOpeningHours.hashCode()
+    }
+
+    override fun toString(): String {
+        return getHumanReadable()
+    }
 }
