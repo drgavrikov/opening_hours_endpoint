@@ -1,7 +1,5 @@
 package com.example.openinghoursendpoint.model
 
-import com.example.openinghoursendpoint.model.OpeningHours
-import com.example.openinghoursendpoint.model.OpeningType
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
