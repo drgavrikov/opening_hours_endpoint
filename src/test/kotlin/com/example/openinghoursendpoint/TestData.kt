@@ -11,7 +11,7 @@ const val HUMAN_READABLE_SCHEDULE = "human-readable-schedule.txt"
 
 const val INVALID_HOURS_SCHEDULE_JSON = "invalid_hours_schedule.json"
 const val INVALID_HOURS_SCHEDULE_EXCEPTION_MESSAGE =
-    "Exception: Opening hours for the following days exceed max value: \n" +
+    "Exception: Opening hours for the following days are negative or exceed max value: \n" +
     "- MONDAY: 88000, 98800\n" +
     "- TUESDAY: 95000, 97800"
 
