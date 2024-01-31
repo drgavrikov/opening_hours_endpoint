@@ -29,10 +29,6 @@ class ScheduleService {
                 }
             }
 
-        schedule.forEach { (day, openingHours) ->
-            println("${day.name}: ${openingHours.map { it.toString() }}")
-        }
-
         validateCorrectOpeningHours(schedule)
         validateOpeningHoursSequence(schedule)
 
@@ -47,12 +43,14 @@ class ScheduleService {
 
     private fun validateCorrectOpeningHours(dayOpeningHours: Map<DayOfWeek, List<OpeningHours>>) {
         val incorrectOpeningHours = dayOpeningHours.entries
-            .map { (day, openingHours) -> day to openingHours.filter { hour -> hour.value >= TimeUnit.DAYS.toSeconds(1) } }
+            .map { (day, openingHours) ->
+                day to openingHours.filter { hour -> hour.value < 0 || hour.value >= TimeUnit.DAYS.toSeconds(1) }
+            }
             .filter { (_, openingHours) -> openingHours.isNotEmpty() }
             .toMap()
 
         if (incorrectOpeningHours.isNotEmpty()) {
-            val message = "Exception: Opening hours for the following days exceed max value: \n" + incorrectOpeningHours
+            val message = "Exception: Opening hours for the following days are negative or exceed max value: \n" + incorrectOpeningHours
                 .entries
                 .joinToString("\n") { (day, openingHours) -> "- $day: ${openingHours.joinToString(", ") { it.value.toString() }}" }
             throw InvalidScheduleDataException(message)
